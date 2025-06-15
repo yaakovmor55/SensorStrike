@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SensorStrike.Factories;
+using SensorStrike.Sensors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +12,13 @@ namespace SensorStrike.Agents
     {
         public JuniorSoldier() : base(GenerateWeaknesses()) { }
 
-        private static List<string> GenerateWeaknesses()
+        private static List<ISensor> GenerateWeaknesses()
         {
-            return new List<string> { "Thermal", "Audio" };
+            //return new List<ISensor>
+            //{new BasicSensor("Thermal"),
+            //  new BasicSensor("Audio")
+            //};
+            return new List<ISensor>() { SensorFactory.CreateRandomSensor(), SensorFactory.CreateRandomSensor() };
         }
     }
 }

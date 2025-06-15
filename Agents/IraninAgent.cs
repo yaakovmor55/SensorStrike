@@ -9,10 +9,10 @@ namespace SensorStrike.Agents
 {
     public abstract class IraninAgent
     {
-        protected List<string> weaknesses;
+        protected List<ISensor> weaknesses;
         protected List<ISensor> attachedSensors;
 
-        public IraninAgent(List<string> weak)
+        public IraninAgent(List<ISensor> weak)
         {
             weaknesses = weak;
             attachedSensors = new List<ISensor>();
@@ -30,14 +30,15 @@ namespace SensorStrike.Agents
         public virtual string GetActiveResult()
         {
             int correctMatches = 0;
-            List<string> temp = new List<string>(weaknesses);
+            List<ISensor> temp = new List<ISensor>(weaknesses);
 
             foreach (ISensor sensor in attachedSensors)
             {
-                if (temp.Contains(sensor.Name))
+                var match = temp.FirstOrDefault(w => w.Name == sensor.Name);
+                if (match != null)
                 {
                     correctMatches++;
-                    temp.Remove(sensor.Name);
+                    temp.Remove(match);
                 }
             }
             return $"{correctMatches}/{weaknesses.Count}";
