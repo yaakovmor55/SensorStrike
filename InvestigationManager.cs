@@ -18,30 +18,54 @@ namespace SensorStrike
             agent = new SquadLeader();
         }
 
-        public  void Start()
+        public void Start()
         {
             Console.WriteLine("Beginning of investigation of Iranian agent");
+
             while (!agent.IsExposed())
             {
-                Console.WriteLine("Chois Sensor (Thermal / Audio / Pulse):");
-                string UserInput = Console.ReadLine();
+                Console.OutputEncoding = Encoding.UTF8;
+                //Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Choose a sensor to attach:");
+                Console.WriteLine("1. Thermal");
+                Console.WriteLine("2. Audio");
+                Console.WriteLine("3. Pulse");
+                Console.Write("Enter your choice (1-3): ");
 
-                if (UserInput == "Thermal" || UserInput == "Audio")
+                string input = Console.ReadLine();
+                int choice;
+                if (!int.TryParse(input, out choice))
                 {
-                    ISensor sensor = new BasicSensor(UserInput);
-                    agent.AttachSensor(sensor);
+                    Console.WriteLine("❌ Invalid input. Please enter a number.");
+                    continue;
                 }
-                else if (UserInput == "Pulse")
+
+                ISensor sensor;
+
+                switch (choice)
                 {
-                    ISensor pulse = new PulseSensor(UserInput);
-                    agent.AttachSensor(pulse);
+                    case 1:
+                        sensor = new BasicSensor("Thermal");
+                        break;
+                    case 2:
+                        sensor = new BasicSensor("Audio");
+                        break;
+                    case 3:
+                        sensor = new PulseSensor("Pulse");
+                        break;
+                    default:
+                        Console.WriteLine("❌ Choice not recognized. Try again.");
+                        continue;
                 }
+
+                agent.AttachSensor(sensor);
 
                 string result = agent.GetActiveResult();
                 Console.WriteLine($"Result: {result}");
             }
-            Console.WriteLine("The agent was successfully exposed.");
 
+            Console.WriteLine("🎯 The agent was successfully exposed.");
         }
+
     }
 }

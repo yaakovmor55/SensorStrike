@@ -41,6 +41,7 @@ namespace SensorStrike.Agents
                     correctMatches++;
                     temp.Remove(match);
                 }
+
             }
             return $"{correctMatches}/{weaknesses.Count}";
         }
