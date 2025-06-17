@@ -18,7 +18,7 @@ namespace SensorStrike.Agents
             //{new BasicSensor("Thermal"),
             //  new BasicSensor("Audio")
             //};
-            return new List<ISensor>() { SensorFactory.CreateRandomSensor(), SensorFactory.CreateRandomSensor() };
+            return new List<ISensor>() { SensorFactory.CreateRandomSensor(), SensorFactory.CreateRandomSensor()};
         }
     }
 }

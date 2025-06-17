@@ -20,6 +20,7 @@ namespace SensorStrike.Agents
 
         public virtual void AttachSensor(ISensor sensor)
         {
+            
             if (sensor.IsActive)
             {
                 attachedSensors.Add(sensor);

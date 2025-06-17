@@ -12,21 +12,30 @@ namespace SensorStrike
     {
         private IraninAgent agent;
 
+
         public InvestigationManager()
         {
-            agent = new JuniorSoldier();
+            agent = new SquadLeader();
         }
 
         public  void Start()
         {
-            Console.WriteLine("Beginning of investigation of junior Iranian agent");
+            Console.WriteLine("Beginning of investigation of Iranian agent");
             while (!agent.IsExposed())
             {
-                Console.WriteLine("Chois Sensor (Thermal / Audio):");
+                Console.WriteLine("Chois Sensor (Thermal / Audio / Pulse):");
                 string UserInput = Console.ReadLine();
 
-                ISensor sensor = new BasicSensor(UserInput);
-                agent.AttachSensor(sensor);
+                if (UserInput == "Thermal" || UserInput == "Audio")
+                {
+                    ISensor sensor = new BasicSensor(UserInput);
+                    agent.AttachSensor(sensor);
+                }
+                else if (UserInput == "Pulse")
+                {
+                    ISensor pulse = new PulseSensor(UserInput);
+                    agent.AttachSensor(pulse);
+                }
 
                 string result = agent.GetActiveResult();
                 Console.WriteLine($"Result: {result}");

@@ -16,9 +16,10 @@ namespace SensorStrike.Sensors
             Name = name;
         }
 
+        
         public void Activate()
         {
-
+            
         }
     }
 }
