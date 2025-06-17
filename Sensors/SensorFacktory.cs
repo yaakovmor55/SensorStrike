@@ -9,8 +9,9 @@ namespace SensorStrike.Factories
         private static readonly List<string> SensorTypes = new List<string>
         {
             "Thermal",
-            "Audio"
-            
+            "Audio",
+            "Pulse"
+
         };
 
         private static readonly Random rand = new Random();
@@ -26,6 +27,7 @@ namespace SensorStrike.Factories
             {
                 "Thermal" => new BasicSensor("Thermal"),
                 "Audio" => new BasicSensor("Audio"),
+                "Pulse" => new PulseSensor("Pulse"),
                 _ => throw new ArgumentException($"Unknown sensor type: {name}")
             };
         }
