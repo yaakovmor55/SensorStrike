@@ -10,15 +10,16 @@ namespace SensorStrike.Agents
 {
     internal class JuniorSoldier : IraninAgent
     {
-        public JuniorSoldier() : base(GenerateWeaknesses()) { }
+        public JuniorSoldier() : base(GenerateWeaknesses(2)) { }
 
-        private static List<ISensor> GenerateWeaknesses()
+        private static List<ISensor> GenerateWeaknesses(int NumOfWeakness)
         {
-            //return new List<ISensor>
-            //{new BasicSensor("Thermal"),
-            //  new BasicSensor("Audio")
-            //};
-            return new List<ISensor>() { SensorFactory.CreateRandomSensor(), SensorFactory.CreateRandomSensor()};
+            List<ISensor> Weaknesses = new List<ISensor>();
+            for (int i = 0; i < NumOfWeakness; i++)
+            {
+                Weaknesses.Add(SensorFactory.CreateRandomSensor());
+            }
+            return Weaknesses;
         }
     }
 }

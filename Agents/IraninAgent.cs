@@ -33,7 +33,7 @@ namespace SensorStrike.Agents
             int correctMatches = 0;
             List<ISensor> temp = new List<ISensor>(weaknesses);
 
-            foreach (ISensor sensor in attachedSensors)
+            foreach (ISensor sensor in attachedSensors.ToList())
             {
                 var match = temp.FirstOrDefault(w => w.Name == sensor.Name);
                 if (match != null)
@@ -41,7 +41,10 @@ namespace SensorStrike.Agents
                     correctMatches++;
                     temp.Remove(match);
                 }
-
+                else
+                {
+                    attachedSensors.Remove(sensor);
+                }
             }
             return $"{correctMatches}/{weaknesses.Count}";
         }

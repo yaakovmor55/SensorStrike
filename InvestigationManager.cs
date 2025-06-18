@@ -15,17 +15,17 @@ namespace SensorStrike
 
         public InvestigationManager()
         {
-            agent = new SquadLeader();
+            agent = new SeniorCommander();
         }
 
         public void Start()
         {
-            Console.WriteLine("Beginning of investigation of Iranian agent");
+            Console.WriteLine($"Beginning of investigation of Iranian agent: {agent.GetType().Name}");
 
             while (!agent.IsExposed())
             {
                 Console.OutputEncoding = Encoding.UTF8;
-                //Console.ForegroundColor = ConsoleColor.Yellow;
+
                 Console.WriteLine("Choose a sensor to attach:");
                 Console.WriteLine("1. Thermal");
                 Console.WriteLine("2. Audio");
